@@ -13,13 +13,13 @@ repos:
         #  Este gancho verifica se arquivos grandes estão sendo adicionados ao repositório
       - id: check-case-conflict
 
-        # detecta e corrigi espaços em branco no final das linhas em arquivos de código-fonte
-      - id: trailing-whitespace
-
         #Verifica se há conflitos de mesclagem deixados em arquivos
       - id: check-merge-conflict
 
-            # Adiciona uma linha em branco ao final de arquivos sem uma
+        # detecta e corrigi espaços em branco no final das linhas em arquivos de código-fonte
+      - id: trailing-whitespace
+
+      # Adiciona uma linha em branco ao final de arquivos sem uma
       - id: end-of-file-fixer
 
         # Ordena as dependências no arquivo requirements.txt
