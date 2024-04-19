@@ -1,11 +1,4 @@
 repos:
--   repo: https://github.com/ambv/black
-    rev: 24.3.0
-    hooks:
-    - id: black
-      language_version: python3.8
-      stages: [commit-msg]
-
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
     hooks:
@@ -16,11 +9,11 @@ repos:
         #Verifica se há conflitos de mesclagem deixados em arquivos
       - id: check-merge-conflict
 
-        # detecta e corrigi espaços em branco no final das linhas em arquivos de código-fonte
-      - id: trailing-whitespace
-
       # Adiciona uma linha em branco ao final de arquivos sem uma
       - id: end-of-file-fixer
+
+        # detecta e corrigi espaços em branco no final das linhas em arquivos de código-fonte
+      - id: trailing-whitespace
 
         # Ordena as dependências no arquivo requirements.txt
       - id: requirements-txt-fixer
@@ -28,6 +21,12 @@ repos:
         #  Verifica se os arquivos YAML estão bem formados
       - id: check-yaml
 
+-   repo: https://github.com/ambv/black
+    rev: 24.3.0
+    hooks:
+    - id: black
+      language_version: python3.8
+      stages: [commit-msg]
 
 -   repo: local
     hooks:

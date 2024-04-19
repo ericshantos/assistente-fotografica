@@ -7,8 +7,17 @@ Pacote que trata a imagem PIL e a retorna como JPEG
 from io import BytesIO
 from PIL import Image, ImageFilter
 
-def tratar_imagem(imagem_rgb):
+def tratar_imagem(imagem_rgb: Image) -> BytesIO:
+    """
+    Aplica tratamento de imagem suavizando-a e adicionando metadados do autor.
 
+    Parameters:
+    imagem_rgb (str): O caminho para o arquivo de imagem RGB a ser tratado.
+
+    Returns:
+    Image: Um objeto de imagem contendo a imagem tratada.
+
+    """
     # Carrega a imagem RGB
     with Image.open(imagem_rgb) as imagem:
 
@@ -28,7 +37,7 @@ def tratar_imagem(imagem_rgb):
 
     return inserir_metadados_autor(imagem_jpeg)
 
-def inserir_metadados_autor(imagem_jpeg):
+def inserir_metadados_autor(imagem_jpeg: Image) -> Image:
 
     # Inclui metadados do autor na imagem
     autor = 'Eric dos Santos'
