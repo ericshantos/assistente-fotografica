@@ -10,7 +10,16 @@ import config_imagem
 
 
 def main() -> None:
+    """
+    Função principal responsável por realizar o processamento das imagens RAW (.CR2).
 
+    A função realiza as seguintes etapas:
+    1. Abre a janela do explorador de arquivos para selecionar as imagens RAW (.CR2).
+    2. Processa as imagens RAW para convertê-las em formato RGB.
+    3. Aplica tratamento de imagem nas imagens RGB selecionadas.
+    4. Realiza o download das imagens tratadas.
+    5. Exibe uma mensagem de conclusão do processo.
+    """
     contador = ContadorDownload()
 
     # Abre a janela do explorador de arquivos para selecionar as imagens RAW (.CR2)
@@ -24,6 +33,7 @@ def main() -> None:
         # Aplica tratamento de imagem nas imagens RGB selecionadas
         imagem_jpeg = config_imagem.tratar_imagem(imagem_rgb)
 
+        # Realiza o download da imagem tratada
         config_imagem.download(imagem_jpeg, contador)
 
     # Mensagem de conclusão do processo

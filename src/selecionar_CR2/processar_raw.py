@@ -10,8 +10,20 @@ import tempfile
 from PIL import Image
 
 
-def processar_raw(raw):
+def processar_raw(raw: str) -> str:
+    """
+    Processa uma imagem RAW para o formato RGB.
 
+    Parameters:
+    raw (str): O caminho para o arquivo de imagem RAW a ser processado.
+
+    Returns:
+    str: O caminho para o arquivo temporário da imagem processada em formato JPEG. Retorna None em caso de erro.
+
+    Raises:
+    Nenhum.
+
+    """
     try:
         # Carrega a imagem RAW
         with rawpy.imread(raw) as raw:
@@ -24,8 +36,11 @@ def processar_raw(raw):
                 # Salva a imagem processada em disco
                 Image.fromarray(imagem_rgb).save(temp_path)
 
+    # Captura e imprime erros de E/S ao processar o arquivo RAW
     except rawpy.LibRawIOError as e:
 
         print(f"Erro de E/S ao processar o arquivo RAW '{raw}': {e}")
+    
+        return None
 
-    return temp_path
+    return temp_path # Retorna o caminho para o arquivo temporário da imagem processada
