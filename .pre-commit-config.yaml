@@ -10,23 +10,24 @@ repos:
     rev: v4.6.0
     hooks:
 
-        #  Verifica se os arquivos YAML estão bem formados
-      - id: check-yaml
-
         #  Este gancho verifica se arquivos grandes estão sendo adicionados ao repositório
       - id: check-case-conflict
+
+        # detecta e corrigi espaços em branco no final das linhas em arquivos de código-fonte
+      - id: trailing-whitespace
 
         #Verifica se há conflitos de mesclagem deixados em arquivos
       - id: check-merge-conflict
 
-        # Adiciona uma linha em branco ao final de arquivos sem uma
+            # Adiciona uma linha em branco ao final de arquivos sem uma
       - id: end-of-file-fixer
 
         # Ordena as dependências no arquivo requirements.txt
       - id: requirements-txt-fixer
 
-        # detecta e corrigi espaços em branco no final das linhas em arquivos de código-fonte
-      - id: trailing-whitespace
+        #  Verifica se os arquivos YAML estão bem formados
+      - id: check-yaml
+
 
 -   repo: local
     hooks:
