@@ -10,11 +10,11 @@ repos:
     rev: v4.6.0
     hooks:
 
-        # Adiciona uma linha em branco ao final de arquivos sem uma
-      - id: end-of-file-fixer
-
         #  Este gancho verifica se arquivos grandes estão sendo adicionados ao repositório
       - id: check-case-conflict
+
+      # Adiciona uma linha em branco ao final de arquivos sem uma
+      - id: end-of-file-fixer
 
         #Verifica se há conflitos de mesclagem deixados em arquivos
       - id: check-merge-conflict
