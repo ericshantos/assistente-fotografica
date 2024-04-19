@@ -12,9 +12,6 @@ repos:
       # Adiciona uma linha em branco ao final de arquivos sem uma
       - id: end-of-file-fixer
 
-        # detecta e corrigi espaços em branco no final das linhas em arquivos de código-fonte
-      - id: trailing-whitespace
-
         # Ordena as dependências no arquivo requirements.txt
       - id: requirements-txt-fixer
 
