@@ -1,5 +1,12 @@
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
+
+-   repo: https://github.com/ambv/black
+    rev: 24.3.0
+    hooks:
+    - id: black
+      stages: [pre-commit]
+
+-   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
     hooks:
         # Este gancho verifica se arquivos grandes estão sendo adicionados ao repositório
@@ -17,16 +24,28 @@ repos:
         # Adiciona uma linha em branco ao final de arquivos sem uma
       - id: end-of-file-fixer
 
-  - repo: https://github.com/ambv/black
-    rev: 24.4.0
+-   repo: local
     hooks:
-      - id: black
-        stages: [pre-commit]
-
-  - repo: local
-    hooks:
-      - id: update-requirements
-        name: Update requirements.txt
+      - id: requirements
+        name: requirements
         entry: 'pip freeze > requirements.txt; git add requirements.txt'
         language: system
+        pass_filenames: false
         stages: [pre-commit]
+
+-   repo: local
+    hooks:
+      - id: unittest
+        name: testes src/
+        language: system
+        entry: python -m unittest discover test
+        always_run: true
+        pass_filenames: false
+        stages: [commit]      
+
+-   repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.21.3
+    hooks:
+      - id: commitizen
+        entry: 'cz commit'
+        stages: [commit-msg]

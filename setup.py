@@ -10,7 +10,7 @@ setup(
     install_requires=["src", "selecionar_CR2", "config_imagem"],
     author="Eric dos Santos",
     author_email="ericshantos13@gmail.com",
-    description="ferramenta no gerenciamento de imagens capituradas por câmeras fotográficas",
+    description="ferramenta no gerenciamento de imagens capturadas por câmeras fotográficas",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/ericshantos/assistente-fotografica",
