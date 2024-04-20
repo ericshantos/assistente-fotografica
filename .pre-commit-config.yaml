@@ -36,7 +36,7 @@ repos:
 -   repo: local
     hooks:
       - id: unittest
-        name: testes src/
+        name: unittest
         language: system
         entry: python -m unittest discover test
         always_run: true
