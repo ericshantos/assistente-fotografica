@@ -17,10 +17,10 @@ def abrir_explorer() -> tuple[str]:
         list: Uma lista contendo os caminhos dos arquivos CR2 selecionados pelo usuário.
     """
     root = tk.Tk()
-    root.withdraw() # Oculta a janela principal
+    root.withdraw()  # Oculta a janela principal
 
     # Abre o explorador de arquivos
-    caminho_arquivo = filedialog.askopenfilenames(filetypes=[('CR2 files','*.cr2')])
+    caminho_arquivo = filedialog.askopenfilenames(filetypes=[("CR2 files", "*.cr2")])
 
     if caminho_arquivo:
 

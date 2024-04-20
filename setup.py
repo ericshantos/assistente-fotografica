@@ -4,13 +4,13 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="asistente-fotografica",
+    name="assistente-fotografica",
     version="1.0.0",
     packages=find_packages(),
     install_requires=["src", "selecionar_CR2", "config_imagem"],
     author="Eric dos Santos",
     author_email="ericshantos13@gmail.com",
-    description="aplicação que fornece suporte para fotos tiradas com câmera Canon",
+    description="ferramenta no gerenciamento de imagens capturadas por câmeras fotográficas",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/ericshantos/assistente-fotografica",
@@ -19,7 +19,6 @@ setup(
     classifiers=[
         "Development Status :: 1 - Planning",
         "Development Status :: 2 - Pre-Alpha",
-        "Development Status :: 5 - Production/Stable"
         "Operating System :: Microsoft :: Windows",
         "License :: OSI Approved :: MIT License",
         "Intended Audience :: Developers",
