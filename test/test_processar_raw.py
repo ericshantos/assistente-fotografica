@@ -1,6 +1,8 @@
 import sys
 
-sys.path.append(rf"C:\Users\erics\PycharmProjects\assistente-fotografica")
+sys.path.append(
+    rf"C:\Users\erics\PycharmProjects\assistente-fotografica"
+)
 sys.path.append(
     rf"C:\Users\erics\PycharmProjects\assistente-fotografica\src\selecionar_CR2"
 )
