@@ -1,22 +1,22 @@
 """
-Pacote responsável por processamento e manipulação de imagens RAW.
+Pacote config_imagem
 
-Este pacote fornece funções para selecionar, processar, tratar e fazer o
-download de imagens RAW, oferecendo uma solução completa para o trabalho
-com esse tipo de arquivo.
+Pacote responsável por fornecer funções para o tratamento e download de imagens.
 
-Módulos:
+O pacote inclui as seguintes funções:
 
-- selecionar_CR2: Fornece funções para selecionar arquivos CR2 (RAW) por
-meio de um explorador de arquivos.
+- tratar_imagem(imagem_rgb: str) -> Image: Aplica tratamento de imagem suavizando-a
+e adicionando metadados do autor.
 
-- config_imagem: Fornece funções para processamento e tratamento de imagens
-RAW e para fazer o download das imagens tratadas.
-
-- contador_download: Fornece uma classe para manter o controle do número
-de downloads realizados.
+- download(img: Image, contador_download: ContadorDownload) -> None: Salva uma imagem
+em formato JPEG na pasta de downloads do usuário, adicionando um contador ao nome do arquivo.
 
 """
+
+# Importações do pacote
+from .tratar_imagem import tratar_imagem, inserir_metadados_autor
+from .download import download
+from .criar_zip import criar_zip
 
 # Autor
 __author__ = "Eric dos Santos <github.com/ericSantos/API-meme-aleatorio>"
