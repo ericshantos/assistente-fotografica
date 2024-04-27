@@ -42,23 +42,44 @@ def criar_zip(nome_zip: str, imagens: list) -> None:
 
 
 def verificar_pasta_existente(nome_da_pasta: str) -> str:
+    """
+    Verifica se uma pasta com o nome especificado já existe no diretório de downloads.
+    Se a pasta existir, adiciona um número ao nome para diferenciá-la.
+
+    Args:
+        nome_da_pasta (str): O nome da pasta a ser verificada.
+
+    Returns:
+        Tuple[str, str]: Uma tupla contendo o caminho para o diretório de downloads e o nome do arquivo ZIP.
+    """
 
     # Caminho para o diretório de downloads
     diretorio_download = os.path.join(os.path.expanduser("~"), "Downloads")
 
+    # Conta o número de cópias da pasta com o mesmo nome no diretório de downloads
     contador = contar_copias(diretorio_download, nome_da_pasta)
 
+    # Verifica se já existe pelo menos uma cópia da pasta
     if contador >= 1:
-
         nome_zip = f"{nome_da_pasta}({contador + 1})"
-
     else:
         nome_zip = nome_da_pasta
 
+    # Retorna o caminho para o diretório de downloads e o nome do arquivo ZIP
     return diretorio_download, f"{nome_zip}.zip"
 
 
 def contar_copias(diretorio: str, arquivo: str) -> int:
+    """
+    Conta o número de cópias de um arquivo com o nome especificado no diretório fornecido.
+
+    Args:
+        diretorio (str): O caminho para o diretório onde os arquivos serão contados.
+        arquivo (str): O nome do arquivo base para procurar cópias.
+
+    Returns:
+        int: O número de cópias encontradas do arquivo.
+    """
 
     # Inicializa o contador de cópias
     contagem = 0

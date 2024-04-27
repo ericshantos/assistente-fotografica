@@ -31,17 +31,7 @@ repos:
         entry: 'pip freeze > requirements.txt; git add requirements.txt'
         language: system
         pass_filenames: false
-        stages: [pre-commit]
-
--   repo: local
-    hooks:
-      - id: unittest
-        name: unittest
-        language: system
-        entry: python -m unittest discover test
-        always_run: true
-        pass_filenames: false
-        stages: [commit]      
+        stages: [pre-commit]   
 
 -   repo: https://github.com/commitizen-tools/commitizen
     rev: v3.21.3

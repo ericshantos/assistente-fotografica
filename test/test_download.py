@@ -1,12 +1,9 @@
 import sys
 
-sys.path.append(
-    rf"C:\Users\erics\PycharmProjects\assistente-fotografica"
-)
+sys.path.append(rf"C:\Users\erics\PycharmProjects\assistente-fotografica")
 sys.path.append(
     rf"C:\Users\erics\PycharmProjects\assistente-fotografica\src\config_imagem"
 )
-
 
 from src.config_imagem.download import download
 import unittest
