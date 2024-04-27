@@ -4,12 +4,9 @@
 Módulo principal, responsável pela execulção da aplicação.
 """
 
-
-import os
-import tempfile
+import os, tempfile
 from config_imagem.download import ContadorDownload
-import selecionar_CR2
-import config_imagem
+import selecionar_CR2, config_imagem
 from PIL import Image
 
 
@@ -29,7 +26,8 @@ def salvar_imagem_temporaria(imagem: Image) -> None:
 
 def main() -> None:
     """
-    Realiza o processamento de imagens RAW (.CR2) e fornece opções de saída com base na quantidade de imagens selecionadas.
+    Realiza o processamento de imagens RAW (.CR2) e fornece opções de saída com base
+    na quantidade de imagens selecionadas.
 
     Esta função realiza as seguintes etapas:
     1. Abre a janela do explorador de arquivos para selecionar imagens RAW (.CR2).
@@ -44,6 +42,10 @@ def main() -> None:
     # Abre a janela do explorador de arquivos para selecionar as imagens RAW (.CR2)
     imagens_selecionadas = selecionar_CR2.abrir_explorer()
 
+    if len(imagens_selecionadas) > 1:
+
+        nome_arquivo_zip = input("Qual deve ser o nome do diretório para download: ")
+
     imagens_tratadas = []  # Lista para armazenar caminhos das imagens tratadas
 
     # Processa as imagens RAW para convertê-las em formato RGB
@@ -56,6 +58,7 @@ def main() -> None:
         imagem_tratada = config_imagem.tratar_imagem(imagem_rgb)
 
         if len(imagens_selecionadas) > 1:  # Se mais de uma imagem for selecionada
+            
             # Salva a imagem tratada em um arquivo temporário e obtém o caminho do arquivo
             caminho_imagem_temporaria = salvar_imagem_temporaria(imagem_tratada)
 
@@ -66,7 +69,7 @@ def main() -> None:
                 indice == len(imagens_selecionadas) - 1
             ):  # Executa apenas na última iteração
                 config_imagem.criar_zip(
-                    "_tireifoto.zip", imagens_tratadas
+                    nome_arquivo_zip, imagens_tratadas
                 )  # Cria um arquivo zip
 
                 # Remove os arquivos temporários após o término do processo
