@@ -14,11 +14,12 @@ em formato JPEG na pasta de downloads do usuário, adicionando um contador ao no
 """
 
 # Importações do pacote
-from .tratar_imagem import tratar_imagem
+from .tratar_imagem import tratar_imagem, inserir_metadados_autor
 from .download import download
+from .criar_zip import criar_zip
 
 # Autor
 __author__ = "Eric dos Santos <github.com/ericSantos/API-meme-aleatorio>"
 
 # Versão do pacote
-__version__ = "1.0.0"
+__version__ = "1.0.1"
