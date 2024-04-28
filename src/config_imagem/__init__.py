@@ -15,6 +15,7 @@ em formato JPEG na pasta de downloads do usuário, adicionando um contador ao no
 
 # Importações do pacote
 from .tratar_imagem import tratar_imagem, inserir_metadados_autor
+from .verificar_pastas_existentes import verificar_pasta_existente
 from .download import download
 from .criar_zip import criar_zip
 

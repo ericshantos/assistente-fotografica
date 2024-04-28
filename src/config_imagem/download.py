@@ -1,5 +1,6 @@
 import os
 from PIL import Image
+import config_imagem
 
 
 def download(img: Image, nome_foto: str) -> None:
@@ -18,10 +19,10 @@ def download(img: Image, nome_foto: str) -> None:
         download(imagem, "minha_imagem.png")
     """
     # Caminho para o diretório de downloads
-    diretorio_download = os.path.join(os.path.expanduser("~"), "Downloads")
+    diretorio_download, nome_imagem = config_imagem.verificar_pasta_existente(nome_foto)
 
     # Define o caminho completo para salvar a imagem com o contador no nome
-    caminho_com_contador = os.path.join(diretorio_download, f"{nome_foto}.jpeg")
+    caminho_com_contador = os.path.join(diretorio_download, nome_imagem)
 
     try:
         # Salva a imagem no caminho especificado
