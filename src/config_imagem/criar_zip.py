@@ -9,7 +9,7 @@ from PIL import Image
 import config_imagem
 
 
-def criar_zip(nome_zip: str, imagens: list) -> None:
+def criar_zip(nome_zip: str, imagens: list, nome_foto: str) -> None:
     """
     Cria um arquivo zip contendo as imagens tratadas.
 
@@ -25,7 +25,7 @@ def criar_zip(nome_zip: str, imagens: list) -> None:
     with zipfile.ZipFile(pasta_destino, "w") as zip_file:
         for indice, imagem in enumerate(imagens):
             nome_imagem = (
-                f"_tireifoto_{indice + 1}.jpg"  # Define o nome da imagem no zip
+                f"{nome_foto}{indice + 1}.jpg"  # Define o nome da imagem no zip
             )
 
             # Carregar a imagem

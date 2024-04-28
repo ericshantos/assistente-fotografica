@@ -5,7 +5,7 @@ Módulo principal, responsável pela execulção da aplicação.
 """
 
 import os, tempfile
-from config_imagem.download import ContadorDownload
+import interface_usuario
 import selecionar_CR2, config_imagem
 from PIL import Image
 
@@ -37,14 +37,19 @@ def main() -> None:
     5. Realiza o download das imagens tratadas, se apenas uma imagem for selecionada.
     6. Exibe uma mensagem indicando a conclusão do processo.
     """
-    contador = ContadorDownload()  # Inicializa o contador de downloads
 
     # Abre a janela do explorador de arquivos para selecionar as imagens RAW (.CR2)
     imagens_selecionadas = selecionar_CR2.abrir_explorer()
 
+    informacoes_foto = interface_usuario.InformacoesFoto()
+
+    # Solicita o nome das fotos ao usuário e armazena na variável nome_fotos
+    nome_foto = informacoes_foto.pegar_nome_foto()
+
     if len(imagens_selecionadas) > 1:
 
-        nome_arquivo_zip = input("Qual deve ser o nome do diretório para download: ")
+        # Solicita o nome do diretório para o download das fotos ao usuário e armazena na variável nome_arquivo_zip
+        nome_arquivo_zip = informacoes_foto.pegar_nome_arquivo_zip()
 
     imagens_tratadas = []  # Lista para armazenar caminhos das imagens tratadas
 
@@ -58,7 +63,7 @@ def main() -> None:
         imagem_tratada = config_imagem.tratar_imagem(imagem_rgb)
 
         if len(imagens_selecionadas) > 1:  # Se mais de uma imagem for selecionada
-            
+
             # Salva a imagem tratada em um arquivo temporário e obtém o caminho do arquivo
             caminho_imagem_temporaria = salvar_imagem_temporaria(imagem_tratada)
 
@@ -69,7 +74,7 @@ def main() -> None:
                 indice == len(imagens_selecionadas) - 1
             ):  # Executa apenas na última iteração
                 config_imagem.criar_zip(
-                    nome_arquivo_zip, imagens_tratadas
+                    nome_arquivo_zip, imagens_tratadas, nome_foto
                 )  # Cria um arquivo zip
 
                 # Remove os arquivos temporários após o término do processo
@@ -78,7 +83,7 @@ def main() -> None:
 
         else:  # Se apenas uma imagem for selecionada
             config_imagem.download(
-                imagem_tratada, contador
+                imagem_tratada, nome_foto
             )  # Realiza o download da imagem tratada
             os.remove(imagem_rgb)  # Remove a imagem tratada após o download
 
