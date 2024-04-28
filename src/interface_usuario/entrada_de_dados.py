@@ -4,6 +4,8 @@
 Módulo reponsável por capturar dados sobre as fotos
 """
 
+import interface_usuario
+
 
 class InformacoesFoto:
     """
@@ -32,6 +34,10 @@ class InformacoesFoto:
         Returns:
             str: O nome das fotos fornecido pelo usuário.
         """
+
+        # Limpa o terminal
+        interface_usuario.limpar_terminal()
+
         # Solicita o nome das fotos ao usuário e armazena na variável nome_foto
         self.nome_foto = input("Qual deve ser o nome das fotos:")
         return self.nome_foto
@@ -43,6 +49,10 @@ class InformacoesFoto:
         Returns:
             str: O nome do diretório fornecido pelo usuário.
         """
+
+        # Limpa o terminal
+        interface_usuario.limpar_terminal()
+
         # Solicita o nome do diretório para o download das fotos ao usuário e armazena na variável nome_arquivo_zip
         self.nome_arquivo_zip = input(
             "Qual deve ser o nome do diretório para download: "

@@ -7,6 +7,7 @@ Pacote que trata a imagem PIL e a retorna como JPEG
 from io import BytesIO
 from PIL import Image, ImageFilter
 
+
 def tratar_imagem(imagem_rgb: Image) -> BytesIO:
     """
     Aplica tratamento de imagem suavizando-a e adicionando metadados do autor.
@@ -21,13 +22,20 @@ def tratar_imagem(imagem_rgb: Image) -> BytesIO:
     # Carrega a imagem RGB
     with Image.open(imagem_rgb) as imagem:
 
+        # Suaviza a imagem
         imagem_suavizada = imagem.filter(ImageFilter.SMOOTH)
+
+        # Acentua a nitidez da imagem
+        imagem_nitida = imagem_suavizada.filter(ImageFilter.SHARPEN)
+
+        # Suaviza ainda mais a imagem
+        imagem_final = imagem_nitida.filter(ImageFilter.SMOOTH_MORE)
 
         # Cria um objeto BytesIO para armazenar dados de imagem em memória
         imagem_jpeg_buffer = BytesIO()
 
         # Converte para JPEG
-        imagem_suavizada.save(imagem_jpeg_buffer, format='JPEG', quality=100)
+        imagem_final.save(imagem_jpeg_buffer, format="JPEG", quality=100)
 
         # Retorna  ao início do buffer de imagem
         imagem_jpeg_buffer.seek(0)
@@ -37,10 +45,11 @@ def tratar_imagem(imagem_rgb: Image) -> BytesIO:
 
     return inserir_metadados_autor(imagem_jpeg)
 
+
 def inserir_metadados_autor(imagem_jpeg: Image) -> Image:
 
     # Inclui metadados do autor na imagem
-    autor = 'Eric dos Santos'
-    imagem_jpeg.info['author'] = autor
+    autor = "Eric dos Santos"
+    imagem_jpeg.info["author"] = autor
 
     return imagem_jpeg
