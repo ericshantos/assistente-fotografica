@@ -83,7 +83,7 @@ def main() -> None:
 
         else:  # Se apenas uma imagem for selecionada
             config_imagem.download(
-                imagem_tratada, nome_foto
+                imagem_tratada, f"{nome_foto}.jpeg"
             )  # Realiza o download da imagem tratada
             os.remove(imagem_rgb)  # Remove a imagem tratada após o download
 
