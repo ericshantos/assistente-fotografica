@@ -159,12 +159,19 @@ Se você encontrar algum problema com o projeto ou tiver uma sugestão para melh
   - Python
 
 - Frameworks e Bibliotecas:
-  - [Pre-commit](docs/_source/pre-commit.rst) (autoamtização de commits)
-  - [Black](docs/_source/black.rst) (formatação de código)
-  - [Pylint](docs/_source/pylint.rst) (conformidade do código com diretrizes estatísticas)
-  - [Commitizen](docs/_source/commitizen.rst) (customização de commits)
-  - [PIL](docs/_source/PIL.rst) (manipulação de imagens)
-  - [Sphinx](docs/_source/sphinx.rst) (documentação)
+  - Pre-commit: autoamtização de commits.
+  - Tkinter: Criação de interfaces gráficas.
+  - rawpy: Processamento de imagens RAW.
+  - os: Interação com o sistema operacional.
+  - shutil: Manipulação de arquivos e diretórios.
+  - zipfile: Trabalho com arquivos zip.
+  - io/ByteIO: Operações de entrada e saída de dados.
+  - re: Expressões regulares em Python.
+  - Black: formatação de código.
+  - Pylint: conformidade do código com diretrizes estatísticas.
+  - Commitizen: customização de commits.
+  - PIL: manipulação de imagens.
+  - Sphinx: documentação
 
 - Ferramentas de Desenvolvimento:
   - Visual Studio Code
