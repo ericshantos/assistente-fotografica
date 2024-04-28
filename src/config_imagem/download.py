@@ -2,47 +2,31 @@ import os
 from PIL import Image
 
 
-class ContadorDownload:
-
-    def __init__(self) -> None:
-        self._contador = 0
-
-    def incrementar(self) -> int:
-        self._contador += 1
-
-    @property
-    def contador(self) -> int:
-        return self._contador
-
-
-def download(img: Image, contador_download: ContadorDownload) -> None:
+def download(img: Image, nome_foto: str) -> None:
     """
-    Salva uma imagem em formato JPEG na pasta de downloads do usuário,
-    adicionando um contador ao nome do arquivo.
+    Salva uma imagem no diretório de downloads com o nome especificado.
 
-    Parameters:
-    img (Image): O objeto de imagem a ser salvo.
-    contador_download (ContadorDownload): O objeto contador que mantém o
-    controle do número de downloads.
+    Args:
+        img (PIL.Image): A imagem a ser salva.
+        nome_foto (str): O nome desejado para a imagem.
 
-    Returns:
-    None
+    Raises:
+        IOError: Se ocorrer um erro ao salvar a imagem.
 
+    Example:
+        Para salvar uma imagem chamada "minha_imagem.png" no diretório de downloads:
+        download(imagem, "minha_imagem.png")
     """
-
-    # Obtém o nome do usuário do ambiente
-    nome_do_usuario = os.environ.get("USERNAME")
-
-    # Incrementa o contador de downloads
-    contador_download.incrementar()
-
-    # Obtém o contador atual através do método contador
-    contador_atual = contador_download.contador
+    # Caminho para o diretório de downloads
+    diretorio_download = os.path.join(os.path.expanduser("~"), "Downloads")
 
     # Define o caminho completo para salvar a imagem com o contador no nome
-    caminho_com_contador = (
-        rf"C:\Users\{nome_do_usuario}\Downloads\_tireifoto_{contador_atual}.jpeg"
-    )
+    caminho_com_contador = os.path.join(diretorio_download, f"{nome_foto}.jpeg")
 
-    # Salva a imagem no caminho especificado
-    img.save(caminho_com_contador)
+    try:
+        # Salva a imagem no caminho especificado
+        img.save(caminho_com_contador)
+
+    except IOError as e:
+        # Se ocorrer um erro ao salvar a imagem, levanta a exceção para informar o problema
+        raise IOError(f"Erro ao salvar a imagem: {str(e)}")
