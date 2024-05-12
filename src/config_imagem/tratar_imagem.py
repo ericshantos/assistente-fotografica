@@ -4,6 +4,7 @@
 Pacote que trata a imagem PIL e a retorna como JPEG
 """
 
+import os
 from io import BytesIO
 from PIL import Image, ImageFilter
 
@@ -43,12 +44,15 @@ def tratar_imagem(imagem_rgb: Image) -> BytesIO:
         # Cria uma nova imagem a partir do buffer JPEG
         imagem_jpeg = Image.open(imagem_jpeg_buffer)
 
+        # Apaga o arquivo temporário
+        os.remove(imagem_rgb)
+
     return inserir_metadados_autor(imagem_jpeg)
 
 
 def inserir_metadados_autor(imagem_jpeg: Image) -> Image:
 
-    # Inclui metadados do autor na imagem
+    # Inclui metadados do autor da imagem
     autor = "Eric dos Santos"
     imagem_jpeg.info["author"] = autor
 
