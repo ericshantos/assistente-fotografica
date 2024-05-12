@@ -4,24 +4,9 @@
 Módulo principal, responsável pela execulção da aplicação.
 """
 
-import os, tempfile
 import interface_usuario
 import selecionar_CR2, config_imagem
-from PIL import Image
-
-
-def salvar_imagem_temporaria(imagem: Image) -> None:
-    """
-    Salva a imagem tratada em um arquivo temporário e retorna o caminho do arquivo.
-    """
-    # Gere um nome de arquivo temporário único
-    arquivo_temporario = tempfile.NamedTemporaryFile(suffix=".jpeg", delete=False)
-
-    # Salva a imagem tratada no arquivo temporário
-    imagem.save(arquivo_temporario.name)
-
-    # Retorna o caminho do arquivo temporário
-    return arquivo_temporario.name
+from tqdm import tqdm
 
 
 def main() -> None:
@@ -51,10 +36,17 @@ def main() -> None:
         # Solicita o nome do diretório para o download das fotos ao usuário e armazena na variável nome_arquivo_zip
         nome_arquivo_zip = informacoes_foto.pegar_nome_arquivo_zip()
 
-    imagens_tratadas = []  # Lista para armazenar caminhos das imagens tratadas
+    # Imagens processadas
+    imagens_processadas = []
+
+    # Barra de progresso
+    progress_bar = tqdm(
+        total=len(imagens_selecionadas), desc="Progresso", unit="iterações"
+    )
 
     # Processa as imagens RAW para convertê-las em formato RGB
     for indice, imagem in enumerate(imagens_selecionadas):
+
         imagem_rgb = selecionar_CR2.processar_raw(
             imagem
         )  # Converte a imagem RAW em RGB
@@ -64,28 +56,27 @@ def main() -> None:
 
         if len(imagens_selecionadas) > 1:  # Se mais de uma imagem for selecionada
 
-            # Salva a imagem tratada em um arquivo temporário e obtém o caminho do arquivo
-            caminho_imagem_temporaria = salvar_imagem_temporaria(imagem_tratada)
-
-            # Adiciona o caminho do arquivo temporário à lista
-            imagens_tratadas.append(caminho_imagem_temporaria)
+            imagens_processadas.append(imagem_tratada)
 
             if (
                 indice == len(imagens_selecionadas) - 1
             ):  # Executa apenas na última iteração
+
                 config_imagem.criar_zip(
-                    nome_arquivo_zip, imagens_tratadas, nome_foto
+                    nome_zip=nome_arquivo_zip,
+                    lista_imagens=imagens_processadas,
+                    nome_foto=nome_foto,
                 )  # Cria um arquivo zip
 
-                # Remove os arquivos temporários após o término do processo
-                for imagem_temporaria in imagens_tratadas:
-                    os.remove(imagem_temporaria)
-
         else:  # Se apenas uma imagem for selecionada
+
             config_imagem.download(
                 imagem_tratada, f"{nome_foto}.jpeg"
             )  # Realiza o download da imagem tratada
-            os.remove(imagem_rgb)  # Remove a imagem tratada após o download
+
+        progress_bar.update(1)  # Atualiza a barra de progresso
+
+    progress_bar.close()  # Fecha a barra de progresso ao finalizar o loop
 
     # Mensagem de conclusão do processo
     print("Processo realizado com sucesso!!")
